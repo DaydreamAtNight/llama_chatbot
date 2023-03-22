@@ -24,10 +24,10 @@
       </div>
     </div>
     <div class="footer">
-      <van-field v-model="typingText" placeholder="输入内容" border>
-        <template #button>
+      <van-field v-model="typingText" placeholder="输入内容" border @keyup.enter.native="sendText" autofocus>
+      <template #button>
           <van-button size="small" type="primary" @click="sendText">发送</van-button>
-        </template>
+      </template>
       </van-field>
     </div>
   </div>
