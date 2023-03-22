@@ -4442,7 +4442,7 @@ var render = function render() {
       fn: function () {
         return [_c('div', {
           staticClass: "message-prompt"
-        }, [_vm._v("没有更多消息了")])];
+        }, [_vm._v("no more messages")])];
       },
       proxy: true
     }, {
@@ -4450,7 +4450,7 @@ var render = function render() {
       fn: function () {
         return [_c('div', {
           staticClass: "message-prompt"
-        }, [_vm._v("没有更多消息了")])];
+        }, [_vm._v("no more messages")])];
       },
       proxy: true
     }])
@@ -4479,7 +4479,7 @@ var render = function render() {
     staticClass: "footer"
   }, [_c('van-field', {
     attrs: {
-      "placeholder": "输入内容",
+      "placeholder": "input contents",
       "border": ""
     },
     scopedSlots: _vm._u([{
@@ -8411,7 +8411,7 @@ var field_style = __webpack_require__("fdc4");
         message.then(message => this.appendNew(Object.assign({
           time: new Date(),
           direction: 'sent'
-        }, message))).catch(e => console.error('发送消息出错', e));
+        }, message))).catch(e => console.error('Error sending message', e));
       } else {
         this.appendNew(Object.assign({
           time: new Date(),
@@ -8426,7 +8426,7 @@ var field_style = __webpack_require__("fdc4");
           reply.then(reply => this.appendNew(Object.assign({
             time: new Date(),
             direction: 'received'
-          }, reply))).catch(e => console.error('发送消息出错', e));
+          }, reply))).catch(e => console.error('Error sending message', e));
         } else {
           this.appendNew(Object.assign({
             time: new Date(),
@@ -8444,7 +8444,7 @@ var field_style = __webpack_require__("fdc4");
       //     reply => this.appendNew(
       //       Object.assign({ time: new Date(), direction: 'received' }, reply)
       //     )
-      //   ).catch(e => console.error('发送消息出错', e))
+      //   ).catch(e => console.error('Error sending message', e))
       // } else {
       //   this.appendNew(Object.assign({ time: new Date(), direction: 'received' }, reply))
       // }
@@ -8476,7 +8476,7 @@ var field_style = __webpack_require__("fdc4");
         history.then(history => {
           this.prependHistory(history, $state);
         }).catch(e => {
-          console.error('加载历史消息出错', e);
+          console.error('Error loading history message', e);
         });
       } else {
         this.prependHistory(history, $state);

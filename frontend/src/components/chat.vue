@@ -4,10 +4,10 @@
       <div ref="content">
         <InfiniteLoading direction="top" @infinite="loadMoreHistory">
           <template #no-more>
-            <div class="message-prompt">没有更多消息了</div>
+            <div class="message-prompt">no more messages</div>
           </template>
           <template #no-results>
-            <div class="message-prompt">没有更多消息了</div>
+            <div class="message-prompt">no more messages</div>
           </template>
         </InfiniteLoading>
         <div v-for="message, index in messages">
@@ -24,9 +24,9 @@
       </div>
     </div>
     <div class="footer">
-      <van-field v-model="typingText" placeholder="输入内容" border @keyup.enter.native="sendText" autofocus>
+      <van-field v-model="typingText" placeholder="input contents" border @keyup.enter.native="sendText" autofocus>
       <template #button>
-          <van-button size="small" type="primary" @click="sendText">发送</van-button>
+          <van-button size="small" type="primary" @click="sendText">send</van-button>
       </template>
       </van-field>
     </div>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import zhCode from 'date-fns/locale/zh-CN'
+import zhCode from 'date-fns/locale/en-US'
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import differenceInMinutes from 'date-fns/differenceInMinutes'
@@ -132,7 +132,7 @@ export default {
           message => this.appendNew(
             Object.assign({ time: new Date(), direction: 'sent' }, message)
           )
-        ).catch(e => console.error('发送消息出错', e))
+        ).catch(e => console.error('Error sending message', e))
       } else {
         this.appendNew(Object.assign({ time: new Date(), direction: 'sent' }, message))
       }
@@ -145,7 +145,7 @@ export default {
               reply => this.appendNew(
                 Object.assign({ time: new Date(), direction: 'received' }, reply)
               )
-            ).catch(e => console.error('发送消息出错', e))
+            ).catch(e => console.error('Error sending message', e))
           } else {
             this.appendNew(Object.assign({ time: new Date(), direction: 'received' }, reply))
           }
@@ -181,7 +181,7 @@ export default {
         history.then(history => {
           this.prependHistory(history, $state)
         }).catch(e => {
-          console.error('加载历史消息出错', e)
+          console.error('Error loading history message', e)
         })
       } else {
         this.prependHistory(history, $state)
