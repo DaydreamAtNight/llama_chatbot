@@ -1,25 +1,22 @@
 <template>
-  <div class="container">
-    <!-- 组件引入的方式，应提供双方的头像，加载历史消息的方式（函数）和发送消息的方式（函数） -->
-    <ChatBox ref="chat" 
-      :sourceAvatar="sourceAvatar" :targetAvatar="targetAvatar" 
-      :loadHistory="loadHistory" :sendMessage="sendMessage" />
+  <div id="app">
+    <router-view :sourceAvatar="sourceAvatar" :targetAvatar="targetAvatar" :loadHistory="loadHistory" />
   </div>
 </template>
 
 <script>
-import ChatBox from '..'
-import '../dist/chat.css'
-
+import BotIcon from './assets/bot.png'
+import UsrIcon from './assets/bear.jpg'
 export default {
-  name: 'ChatDemo',
+  name: 'App',
   components: {
-    ChatBox
+    BotIcon,
+    UsrIcon,
   },
   data () {
     return {
-      sourceAvatar: 'https://gitee.com/run27017/assets/raw/master/avatars/girl.jpg',
-      targetAvatar: 'https://gitee.com/run27017/assets/raw/master/avatars/bear.jpg'
+      sourceAvatar: UsrIcon,
+      targetAvatar: BotIcon
     }
   },
   methods: {
@@ -28,34 +25,23 @@ export default {
       return { 
         // 消息数据，字段如下，应以时间的倒序给出。
         messages: [
-          { text: "Really cute!", time: new Date(2020, 8, 4), direction: 'sent' },
-          { text: "Hey, I'm a bear!", time: new Date(2020, 7, 4), direction: 'received' },
-          { text: 'Hello, who are you?', time: new Date(2020, 7, 4), direction: 'sent' },
+          { text: "Ask me any questions like what you will do to ChatGPT, come on!", time: new Date(), direction: 'received' },
+          { text: "What can you do!", time: new Date(), direction: 'sent' },
+          { text: "Hey, I'm a AI backended chatbot developed by Ryan LI, see 172.26.53.226:4000 for the development documentation!", time: new Date(), direction: 'received' },
+          { text: 'Hello, who are you?', time: new Date(), direction: 'sent' },
         ], 
         // 定义是否还有历史消息，如果为 false，将停止加载。读者可将其改为 true 演示一下自动滚动更新的效果。
         hasMore: false 
       }
     },
-
-    // 定义发送消息的方式。如果发送成功，应该返回成功发送的消息数据，或者 Promise.
-    sendMessage ({ text }) {
-      return {
-        text,
-        time: new Date(),
-        direction: 'sent'
-      }
-    },
-
-    // 该函数演示如何加载新消息（一般通过 WebSocket 实时收取）
-    receiveMessage (message) {
-      this.$refs.chat.appendNew(message)
-    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-.container {
-  height: 600px;
+#app {
+  height: 1000px;
+  padding-left: 200px;
+  padding-right: 200px;
 }
 </style>

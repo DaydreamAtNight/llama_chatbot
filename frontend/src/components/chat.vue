@@ -87,6 +87,12 @@ export default {
       default ({ text }) {
         return { text, direction: 'sent' }
       }
+    },
+    replyMessage: {
+      type: Function,
+      default({ text }) {
+        return { text, direction: 'received' }
+      }
     }
   },
   data () {
@@ -113,7 +119,13 @@ export default {
   },
   methods: {
     sendText () {
+      var param = {
+        "word": this.typingText
+      }
+      
       const message = this.sendMessage({ text: this.typingText })
+      const path = 'http://localhost:5000/word/reply';
+
       this.typingText = ''
       if (message instanceof Promise) {
         message.then(
@@ -124,6 +136,24 @@ export default {
       } else {
         this.appendNew(Object.assign({ time: new Date(), direction: 'sent' }, message))
       }
+
+      this.axios.post(path, param).then(
+        res => {
+          const reply = this.replyMessage({ text: res.data })
+          if (reply instanceof Promise) {
+            reply.then(
+              reply => this.appendNew(
+                Object.assign({ time: new Date(), direction: 'received' }, reply)
+              )
+            ).catch(e => console.error('发送消息出错', e))
+          } else {
+            this.appendNew(Object.assign({ time: new Date(), direction: 'received' }, reply))
+          }
+          console.log(res.data)
+        }
+      ).catch(res => {
+        console.log(res.data.res)
+      })
     },
     prependHistory (history, $state) {
       const messages = history.messages || []
