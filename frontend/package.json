@@ -15,7 +15,7 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name chat src/components/chat.vue"
+    "build": "vue-cli-service build"
   },
   "files": [
     "dist/chat.umd.min.js",

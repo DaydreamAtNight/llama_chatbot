@@ -124,7 +124,7 @@ export default {
       }
       
       const message = this.sendMessage({ text: this.typingText })
-      const path = 'http://localhost:5000/word/reply';
+      const path = '/word/reply';
 
       this.typingText = ''
       if (message instanceof Promise) {
