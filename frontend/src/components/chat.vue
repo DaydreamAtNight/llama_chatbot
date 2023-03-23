@@ -18,7 +18,7 @@
             :style="{ flexDirection: message.direction === 'received' ? 'row' : 'row-reverse' }" >
             <van-image width="32" height="32" 
               :src="message.direction === 'received' ? targetAvatar : sourceAvatar" />
-            <van-button type="default" size="small" round>{{ message.text }}</van-button>
+            <van-button class="message-button" type="default" size="small">{{ message.text }}</van-button>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
     <div class="footer">
       <van-field v-model="typingText" placeholder="input contents" border @keyup.enter.native="sendText" autofocus>
       <template #button>
-          <van-button size="small" type="primary" @click="sendText">send</van-button>
+          <van-button class="message-butto" size="normal" type="default" @click="sendText"><i class="el-icon-position"></i></van-button>
       </template>
       </van-field>
     </div>
@@ -218,6 +218,15 @@ export default {
   > * {
     margin: 2px;
   }
+}
+
+.message-button {
+  margin: 2px;
+  text-align: left;
+  word-wrap: break-word;
+  display: inline-block; 
+  max-width: 90%;
+  height: auto;  
 }
 
 .message-prompt {
