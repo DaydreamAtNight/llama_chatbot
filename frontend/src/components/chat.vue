@@ -18,15 +18,15 @@
             :style="{ flexDirection: message.direction === 'received' ? 'row' : 'row-reverse' }" >
             <van-image width="32" height="32" 
               :src="message.direction === 'received' ? targetAvatar : sourceAvatar" />
-            <van-button class="message-button" type="default" size="small">{{ message.text }}</van-button>
+            <div  class="message-button" style="white-space: pre-wrap">{{ message.text }}</div>
           </div>
         </div>
       </div>
     </div>
     <div class="footer">
-      <van-field v-model="typingText" placeholder="input contents" border @keyup.enter.native="sendText" autofocus>
+      <van-field v-model="typingText"  type="textarea" :rows="2 " @keydown.enter.shift.native="sendText" placeholder="input contents" border autofocus>
       <template #button>
-          <van-button class="message-butto" size="normal" type="default" @click="sendText"><i class="el-icon-position"></i></van-button>
+          <van-button class="send-button" size="large" type="default" @click="sendText"><i class="el-icon-position"></i></van-button>
       </template>
       </van-field>
     </div>
@@ -190,7 +190,7 @@ export default {
     scrollToBottom () {
       this.$refs.contentContainer.scrollTop = Number.MAX_SAFE_INTEGER
     }
-  }
+  },
 }
 </script>
 
@@ -206,7 +206,7 @@ export default {
   }
 
   .footer {
-    height: 50px;
+    height: 80px;
   }
 }
 
@@ -221,12 +221,24 @@ export default {
 }
 
 .message-button {
+  font-size: small;
+  background-color: whitesmoke;
   margin: 2px;
   text-align: left;
   word-wrap: break-word;
   display: inline-block; 
+  border-radius: 8px;
   max-width: 90%;
-  height: auto;  
+  height: auto;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.send-button {
+  display: inline-block; 
+  width: 50px;
+  height: 50px  
 }
 
 .message-prompt {
